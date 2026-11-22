@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#08090b">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Scene">
+<title>Scene</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-180.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="top">
+  <div class="bar">
+    <h1 class="chrome">SCENE</h1>
+    <span id="updated" class="muted small"></span>
+    <button id="refresh" class="icon-btn" aria-label="Refresh">↻</button>
+  </div>
+  <div id="install" class="install" hidden>
+    Tap <b>Share</b> <span class="share-ico">⎋</span> then <b>Add to Home Screen</b> to install Scene and turn on drop alerts.
+    <button id="install-x" aria-label="Dismiss">✕</button>
+  </div>
+  <div id="filters">
+    <div class="search"><input id="q" type="search" placeholder="Search pieces, brands, collabs" autocomplete="off"></div>
+    <div id="chips" class="chips"></div>
+  </div>
+</header>
+
+<main>
+  <section id="view-drops" class="view">
+    <div id="status" class="status"></div>
+    <button id="drop-back" class="drop-back" hidden><span class="chev-l">‹</span><span class="db-t"></span></button>
+    <div id="drop-list" class="drops"></div>
+    <div id="grid" class="grid"></div>
+    <div id="more" class="more"></div>
+  </section>
+  <section id="view-news" class="view" hidden><div id="news" class="list"></div></section>
+  <section id="view-saved" class="view" hidden><div id="saved" class="grid"></div></section>
+  <section id="view-alerts" class="view" hidden>
+    <div class="panel">
+      <h2>Drop alerts</h2>
+      <p class="muted" id="alert-help"></p>
+      <button id="enable-alerts" class="chrome-btn">Turn on alerts</button>
+      <div id="alert-kinds" class="kinds"></div>
+      <div id="code-box" hidden>
+        <p class="muted small">Your alert code. It changes when you change brands or alert types; send the new one to the GitHub secret <b>PUSH_SUBS</b>.</p>
+        <textarea id="alert-code" readonly rows="4"></textarea>
+        <button id="copy-code" class="ghost-btn">Copy code</button>
+      </div>
+    </div>
+    <h3 class="section-h">Recent alerts</h3>
+    <div id="events" class="list"></div>
+  </section>
+  <section id="view-brands" class="view" hidden>
+    <div class="panel">
+      <h2>Your brands</h2>
+      <p class="muted small">Switch off what you don't want. <em>Shop</em> = exact products straight from the brand's store. <em>News</em> = brand blocks apps, so you get release stories instead.</p>
+      <div class="row-btns"><button id="all-on" class="ghost-btn">All on</button><button id="all-off" class="ghost-btn">All off</button></div>
+    </div>
+    <div id="brand-list" class="brand-list"></div>
+  </section>
+  <p id="empty" class="empty" hidden></p>
+</main>
+
+<nav class="tabbar">
+  <button data-view="drops" class="on"><span class="ti">◆</span>Drops</button>
+  <button data-view="news"><span class="ti">☰</span>News</button>
+  <button data-view="alerts"><span class="ti">◉</span>Alerts</button>
+  <button data-view="saved"><span class="ti">♥</span>Saved</button>
+  <button data-view="brands"><span class="ti">⚙</span>Brands</button>
+</nav>
+
+<script src="config.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

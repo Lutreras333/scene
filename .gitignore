@@ -1,0 +1,4 @@
+secrets/
+__pycache__/
+.claude/
+new_events.json

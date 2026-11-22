@@ -1,0 +1,49 @@
+# Checks every store and feed about every 15 minutes, sends drop alerts,
+# and publishes the app on GitHub Pages. (GitHub may run it a few minutes late.)
+name: update-feed
+on:
+  schedule:
+    - cron: "*/15 * * * *"
+  workflow_dispatch:
+    inputs:
+      test:
+        description: "Send a test notification"
+        type: boolean
+        default: false
+  push:
+    branches: [main]
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+concurrency: { group: scene, cancel-in-progress: false }
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.11" }
+      - run: pip install pywebpush==2.0.3
+      - run: python fetch.py
+      - name: Send alerts
+        env:
+          VAPID_PRIVATE: ${{ secrets.VAPID_PRIVATE }}
+          PUSH_SUBS: ${{ secrets.PUSH_SUBS }}
+          SITE_URL: https://${{ github.repository_owner }}.github.io
+        run: python notify.py ${{ inputs.test && '--test' || '' }}
+      - name: Save data back to the repo
+        run: |
+          git config user.name "scene-bot"
+          git config user.email "scene-bot@users.noreply.github.com"
+          git add site/data/items.json
+          git diff --cached --quiet || git commit -m "Update drops"
+          git pull --rebase -q && git push
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with: { path: site }
+      - id: deploy
+        uses: actions/deploy-pages@v4
