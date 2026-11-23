@@ -36,6 +36,7 @@
 
 <main>
   <section id="view-drops" class="view">
+    <div id="upcoming"></div>
     <div id="status" class="status"></div>
     <button id="drop-back" class="drop-back" hidden><span class="chev-l">‹</span><span class="db-t"></span></button>
     <div id="drop-list" class="drops"></div>
@@ -59,13 +60,14 @@
     <h3 class="section-h">Recent alerts</h3>
     <div id="events" class="list"></div>
   </section>
-  <section id="view-brands" class="view" hidden>
-    <div class="panel">
-      <h2>Your brands</h2>
-      <p class="muted small">Switch off what you don't want. <em>Shop</em> = exact products straight from the brand's store. <em>News</em> = brand blocks apps, so you get release stories instead.</p>
+  <section id="view-catalog" class="view" hidden>
+    <div id="cat-head" class="panel">
+      <h2>Catalog</h2>
+      <p class="muted small">Tap a brand to go through everything it has, collection by collection. The switch hides a brand from Drops, News and alerts.</p>
       <div class="row-btns"><button id="all-on" class="ghost-btn">All on</button><button id="all-off" class="ghost-btn">All off</button></div>
     </div>
     <div id="brand-list" class="brand-list"></div>
+    <div id="brand-page" hidden></div>
   </section>
   <p id="empty" class="empty" hidden></p>
 </main>
@@ -73,10 +75,23 @@
 <nav class="tabbar">
   <button data-view="drops" class="on"><span class="ti">◆</span>Drops</button>
   <button data-view="news"><span class="ti">☰</span>News</button>
-  <button data-view="alerts"><span class="ti">◉</span>Alerts</button>
+  <button data-view="catalog"><span class="ti">▦</span>Catalog</button>
   <button data-view="saved"><span class="ti">♥</span>Saved</button>
-  <button data-view="brands"><span class="ti">⚙</span>Brands</button>
+  <button data-view="alerts"><span class="ti">◉</span>Alerts</button>
 </nav>
+
+<div id="sheet" class="sheet" hidden>
+  <div class="sheet-card">
+    <div class="sheet-grab"></div>
+    <button id="sheet-x" class="sheet-x" aria-label="Close">✕</button>
+    <div id="sheet-body" class="sheet-body"></div>
+  </div>
+</div>
+<div id="zoom" class="zoom" hidden>
+  <div id="zoom-track" class="zoom-track"></div>
+  <div id="zoom-n" class="zoom-n"></div>
+  <button id="zoom-x" class="zoom-x" aria-label="Close">✕</button>
+</div>
 
 <script src="config.js"></script>
 <script src="app.js"></script>

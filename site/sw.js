@@ -1,5 +1,5 @@
 // Scene service worker: offline app shell, fresh data, and drop alerts.
-const CACHE = "scene-v2";
+const CACHE = "scene-v3";
 const SHELL = ["./", "index.html", "style.css", "app.js", "config.js", "manifest.webmanifest", "icon-180.png", "icon-192.png", "icon-512.png"];
 
 self.addEventListener("install", (e) => {

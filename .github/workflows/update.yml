@@ -39,7 +39,7 @@ jobs:
         run: |
           git config user.name "scene-bot"
           git config user.email "scene-bot@users.noreply.github.com"
-          git add site/data/items.json
+          git add site/data
           git diff --cached --quiet || git commit -m "Update drops"
           git pull --rebase -q && git push
       - uses: actions/configure-pages@v5
